@@ -1,0 +1,186 @@
+@import 'typography';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+  @include flex-colum();
+  @include font();
+}
+
+body > * {
+  width: 90%;
+
+  @include flex-colum();
+
+  margin: 1.5rem auto;
+
+  h1,
+  h2 {
+    @include font($fs: 1.6rem, $lh:1.3rem, $fw:bold, $tt: uppercase);
+
+    align-self: center;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.3rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
+}
+
+header {
+  margin-bottom: 0;
+  border: 1px solid $gray-dark;
+}
+
+main {
+  @include flex-colum();
+
+  > * {
+    width: 100%;
+
+    @include flex-colum();
+
+    > * {
+      width: 100%;
+    }
+  }
+
+  @include mq() {
+    @include flex-row();
+
+    justify-content: space-between;
+
+    > * {
+      padding: 0 1rem;
+    }
+
+    .score__box {
+      width: 50%;
+    }
+
+    .form__box {
+      width: 50%;
+      margin-top: 0;
+    }
+  }
+
+  @include mq($mw: 56.25rem) {
+    > * {
+      padding: 0 2rem;
+    }
+  }
+}
+
+.btn {
+  border: 2px solid $accent;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+
+  @include font($color: $accent);
+
+  background-color: transparent;
+  transition: background-color ease-out 250ms;
+}
+
+.btn:hover {
+  background-color: $accent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.main__box-title {
+  padding: 1rem;
+
+  @include flex-row();
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid $gray-dark;
+
+  .score__list-item {
+    width: 100%;
+
+    @include flex-row();
+
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+
+    @include mq($mw: 31.25rem) {
+      padding: 0.25rem 1rem;
+    }
+  }
+
+  .score__list-item:nth-child(even) {
+    background-color: $gray-light;
+  }
+}
+
+.form__box {
+  margin-top: 1rem;
+
+  .main__box-title {
+    justify-content: center;
+  }
+
+  #form__input {
+    @include flex-colum();
+
+    align-items: center;
+    padding: 1rem;
+
+    input[type=text] {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: none;
+      outline: 1px solid $gray-dark;
+
+      @include font();
+    }
+
+    input[type=text]:focus {
+      outline: 1px solid $accent;
+    }
+
+    .btn {
+      margin-top: 1rem;
+      align-self: flex-end;
+    }
+  }
+}
+
+/* FORM VALIDATION */
+.form__message {
+  display: none;
+  padding: 0.3rem;
+  margin: 0.5rem 0;
+  color: #05d3b1;
+}
+
+.error-message {
+  color: #fd3f3f;
+}
+
+.visible {
+  display: block;
+}
