@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+$ff: 'Comfortaa', cursive;
+$base: #023047;
+$accent: #219ebc;
+$pink: #e68ab4;
+$gray-light: #dee2e6;
+$gray-dark: #ced4da;
+
+@mixin font($fs:1rem, $fw:200, $lh:1.1rem, $ls:normal, $color: $base, $tt:Capitalize) {
+  font-family: $ff;
+  font-size: $fs;
+  font-weight: $fw;
+  letter-spacing: $ls;
+  line-height: $lh;
+  color: $color;
+  text-transform: $tt;
+}
+
+@mixin flex-colum {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+@mixin mq ($mw:50rem) {
+  @media (min-width: $mw) {
+    @content;
+  }
+}
