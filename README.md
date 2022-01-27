@@ -8,8 +8,9 @@ The leaderboard website displays scores submitted by different players. It also 
 
 - The website display a basic layout which charge dynamically the current score list.
 - The score list can be updated by clicking the "Refresh".
-- New scores can be added using a form by clicking the "Add new" button. It adds the new score automatically to the scores list.
-- A new game is created on page refresh. The new scores will be added to this latest game.
+- New scores can be added using a form by clicking the "Submit" button. It adds the new score automatically to the scores list.
+- A new game is created the first time the page is loaded. The game's information is saved to local storage.
+- All new scores will be added to this latest game.
 
 
 ## Built With
