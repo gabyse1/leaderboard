@@ -16,45 +16,9 @@
     <div class="main__box score__box">
       <div class="main__box-title">
         <h2>Recent scores</h2>
-        <button type="button" name="btn__refresh" class="btn">Refresh</button>
+        <button type="button" name="btn__refresh" id="btn__refresh" class="btn">Refresh</button>
       </div>
-      <ul class="score__list">
-        <li class="score__list-item">
-          <p class="score__item-name">Name 01</p>
-          <span class="score__item-score">100</span>
-        </li>
-        <li class="score__list-item">
-          <p class="score__item-name">Name 02</p>
-          <span class="score__item-score">200</span>
-        </li>
-        <li class="score__list-item">
-          <p class="score__item-name">Name 03</p>
-          <span class="score__item-score">300</span>
-        </li>
-        <li class="score__list-item">
-          <p class="score__item-name">Name 04</p>
-          <span class="score__item-score">400</span>
-        </li>
-        <li class="score__list-item">
-          <p class="score__item-name">Name 05</p>
-          <span class="score__item-score">500</span>
-        </li>
-        <li class="score__list-item">
-          <p class="score__item-name">Name 06</p>
-          <span class="score__item-score">600</span>
-        </li>
-        <li class="score__list-item">
-          <p class="score__item-name">Name 07</p>
-          <span class="score__item-score">700</span>
-        </li>
-        <li class="score__list-item">
-          <p class="score__item-name">Name 08</p>
-          <span class="score__item-score">800</span>
-        </li>
-        <li class="score__list-item">
-          <p class="score__item-name">Name 09</p>
-          <span class="score__item-score">900</span>
-        </li>
+      <ul class="score__list" id="score__list">
       </ul>
     </div>
     <div class="main__box form__box">
@@ -62,10 +26,10 @@
         <h2>Add your score</h2>
       </div>
       <form action="#" id="form__input">
-        <input type="text" name="inp__name" id="inp__name" placeholder="Name">
-        <input type="text" name="inp__score" id="inp__score" placeholder="Score">
+        <input type="text" name="inp__user" id="inp__user" class="input__field" placeholder="User...">
+        <input type="number" name="inp__score" id="inp__score" class="input__field" min="1" placeholder="Score...">
         <input type="submit" name="btn__submit" id="btn__submit" class="btn" value="Add new">
-        <span class="form__message"></span>
+        <span class="form__message" id="form__message"></span>
       </form>
     </div>
   </main>
