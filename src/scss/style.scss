@@ -117,12 +117,16 @@ main {
 
   .score__list-item {
     width: 100%;
+    padding: 0.25rem 0.5rem;
 
     @include flex-row();
 
     justify-content: space-between;
     align-items: center;
-    padding: 0.25rem 0.5rem;
+
+    .score__item-score {
+      margin-left: 1rem;
+    }
 
     @include mq($mw: 31.25rem) {
       padding: 0.25rem 1rem;
@@ -147,7 +151,7 @@ main {
     align-items: center;
     padding: 1rem;
 
-    input[type=text] {
+    .input__field {
       width: 100%;
       max-width: 500px;
       margin-bottom: 1rem;
@@ -158,7 +162,7 @@ main {
       @include font();
     }
 
-    input[type=text]:focus {
+    .input__field:focus {
       outline: 1px solid $accent;
     }
 
