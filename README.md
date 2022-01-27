@@ -6,9 +6,10 @@ The leaderboard website displays scores submitted by different players. It also 
 
 ## Features
 
-- The website display a simple markup to build a leaderboard functions.
-- It displays a recent score list. It can be updated by clicking the "Refresh"
-- New scores can be added using a form by clicking the "Add new" button.
+- The website display a basic layout which charge dynamically the current score list.
+- The score list can be updated by clicking the "Refresh".
+- New scores can be added using a form by clicking the "Add new" button. It adds the new score automatically to the scores list.
+- A new game is created on page refresh. The new scores will be added to this latest game.
 
 
 ## Built With
