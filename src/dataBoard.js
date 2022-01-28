@@ -1,13 +1,14 @@
 export default class DataBoard {
   constructor() {
-    this.data = [];
+    this.games = [];
+    this.scores = [];
     this.url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
     this.idGame = '';
     this.message = '';
   }
 
   refreshScores = () => {
-    this.data.sort((a, b) => b.score - a.score);
+    this.scores.sort((a, b) => b.score - a.score);
   }
 
   getScores = async () => {
@@ -15,16 +16,16 @@ export default class DataBoard {
       await fetch(`${this.url}games/${this.idGame}/scores/`)
         .then((response) => response.json())
         .then((data) => {
-          this.data = data.result;
-          this.refreshScores();
-          if (this.data.length === 0) {
-            this.data = [{ user: `Game with ID: ${this.idGame} is empty. </br> Add scores`, score: '' }];
+          this.scores = data.result;
+          this.scores.sort((a, b) => b.score - a.score);
+          if (this.scores.length === 0) {
+            this.scores = [{ user: `Game with ID: ${this.idGame} is empty. </br> Add scores`, score: '' }];
           }
         });
     } catch {
-      this.data = [{ user: 'Data is not available for now. Try again later.', score: '' }];
+      this.scores = [{ user: 'Data is not available for now. Try again later.', score: '' }];
     }
-    return this.data;
+    return this.scores;
   }
 
   addScore = async (user1, score1) => {
@@ -46,12 +47,12 @@ export default class DataBoard {
     }
   }
 
-  addGame = async () => {
+  addGame = async (game) => {
     try {
-      if (!this.loadLocalStorage()) {
+      if (this.validGame(game)) {
         await fetch(`${this.url}games/`, {
           method: 'POST',
-          body: JSON.stringify({ name: "Gaby's game" }),
+          body: JSON.stringify({ name: game }),
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
           },
@@ -61,25 +62,49 @@ export default class DataBoard {
             this.idGame = data.result.slice(14, 34);
             if (data.result === `Game with ID: ${this.idGame} added.`) {
               this.message = 'Successful';
-              this.saveLocalStorage();
+              this.saveLocalStorage(game);
             } else this.message = data.result;
           });
-      } else this.message = 'Successful';
+      }
     } catch {
       this.message = 'The game could not be created. Try it again later.';
     }
   }
 
-  saveLocalStorage = () => {
-    localStorage.setItem('GAMES', JSON.stringify({ idG: this.idGame, nameG: "Gaby's game" }));
+  existGame = (game) => {
+    const localGames = JSON.parse(localStorage.getItem('GAMES'));
+    if (localGames) {
+      this.games = localGames;
+      const filterGame = this.games.filter((el) => el.nameG.toLowerCase() === game.toLowerCase());
+      if (filterGame.length > 0) return true;
+    }
+    return false;
+  };
+
+  validGame = (game) => {
+    if (game === '' || game === null) {
+      this.message = 'Please enter a valid game name';
+      return false;
+    }
+    if (this.existGame(game)) {
+      this.message = 'A game with this name already exists.';
+      return false;
+    }
+    return true;
+  }
+
+  getGame = () => {
+    const gn = this.games.filter((el) => el.idG === this.idGame);
+    return gn;
+  }
+
+  saveLocalStorage = (game) => {
+    this.games.push({ idG: this.idGame, nameG: game });
+    localStorage.setItem('GAMES', JSON.stringify(this.games));
   };
 
   loadLocalStorage = () => {
     const localGames = JSON.parse(localStorage.getItem('GAMES'));
-    if (localGames && localGames.idG) {
-      this.idGame = localGames.idG;
-      return true;
-    }
-    return false;
+    if (localGames) this.games = localGames;
   };
 }
