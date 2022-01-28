@@ -10,8 +10,11 @@
 
 <body>
   <header>
-    <h1>Leaderboard</h1>
+    <h1 id="title">Leaderboard</h1>
   </header>
+  <div id="options__box">
+    <button type="button" id="btn__change-game" class="btn">Change game</button>
+  </div>
   <main>
     <div class="main__box score__box">
       <div class="main__box-title">
@@ -29,10 +32,21 @@
         <input type="text" name="inp__user" id="inp__user" class="input__field" placeholder="User...">
         <input type="number" name="inp__score" id="inp__score" class="input__field" min="1" placeholder="Score...">
         <input type="submit" name="btn__submit" id="btn__submit" class="btn" value="Submit">
-        <span class="form__message" id="form__message"></span>
+        <span class="form__message" id="form__message-score"></span>
       </form>
     </div>
   </main>
+  <div id="modal__box" class="modal__box modal__box-display">
+    <div id="modal__content" class="modal__game">
+      <h2>Create or choose a game</h2>
+      <form action="#" id="form__game">
+        <input type="text" name="inp__game" id="inp__game" class="input__field"
+          placeholder="Game name... press enter key to save...">
+        <span class="form__message" id="form__message-game"></span>
+      </form>
+      <select name="select__game" id="select__game" class="select__field"></select>
+    </div>
+  </div>
 </body>
 
 </html>
