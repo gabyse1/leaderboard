@@ -10,11 +10,11 @@ The leaderboard website displays scores submitted by different players. It also 
 
 ## Features
 
-- The website displays a basic layout which charge dynamically the current score list of the selected game.
+- The website displays a basic layout that *dynamically loads* the current score list for the selected game.
 - The *game interface* is displayed when the page is loaded and by clicking on the link *change game* below the title of the page.
-- A new game can be created and an existing game can also be selected using the *game interface*. Game information is saved to local storage.
-- New scores can be added using the form *add scores* by clicking on its *Submit* button.
-- The added score can be visualized by updating the *recent scores* list. Update it by clicking on the *refresh* button.
+- A *new game* can be created and an existing game can also be selected using the *game interface*. Game information is saved to local storage.
+- *New scores* can be added using the form *add scores* by clicking on its *Submit* button.
+- The *added score* can be visualized by updating the *recent scores* list. Update it by clicking on the *refresh* button.
 
 
 ## Built With
