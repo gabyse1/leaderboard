@@ -1,4 +1,5 @@
 @import 'typography';
+@import 'mixins';
 
 *,
 *::before,
@@ -13,14 +14,13 @@ body {
 
   @include flex-colum();
   @include font();
-}
 
-body > * {
-  width: 90%;
+  > * {
+    width: 90%;
+    margin: 1.5rem auto;
 
-  @include flex-colum();
-
-  margin: 1.5rem auto;
+    @include flex-colum();
+  }
 
   h1,
   h2 {
@@ -30,18 +30,83 @@ body > * {
   }
 
   h2 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     line-height: 1.3rem;
   }
 
   p {
     margin: 0.5rem 0;
   }
+
+  .btn {
+    border: 2px solid $accent;
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+
+    @include font($color: $accent);
+
+    background-color: transparent;
+    transition: background-color ease-out 250ms;
+  }
+
+  form {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+
+    @include flex-colum();
+
+    align-items: center;
+
+    .input__field {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: none;
+      outline: 1px solid $gray-dark;
+
+      @include font();
+
+      &:focus {
+        outline: 1px solid $accent;
+      }
+    }
+
+    .btn {
+      margin-top: 1rem;
+      align-self: flex-end;
+    }
+  }
+
+  .btn:hover {
+    background-color: $accent;
+    color: #fff;
+    cursor: pointer;
+  }
 }
 
 header {
   margin-bottom: 0;
   border: 1px solid $gray-dark;
+}
+
+#options__box {
+  @include flex-row;
+
+  justify-content: flex-end;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  .btn {
+    border: none;
+    padding-right: 0;
+    transition: color ease-out 250ms;
+
+    &:hover {
+      background-color: transparent;
+      color: $base;
+    }
+  }
 }
 
 main {
@@ -60,7 +125,7 @@ main {
   @include mq() {
     @include flex-row();
 
-    justify-content: space-between;
+    justify-content: space-around;
 
     > * {
       padding: 0 1rem;
@@ -71,7 +136,7 @@ main {
     }
 
     .form__box {
-      width: 50%;
+      width: 40%;
       margin-top: 0;
     }
   }
@@ -81,23 +146,6 @@ main {
       padding: 0 2rem;
     }
   }
-}
-
-.btn {
-  border: 2px solid $accent;
-  border-radius: 3px;
-  padding: 0.5rem 1rem;
-
-  @include font($color: $accent);
-
-  background-color: transparent;
-  transition: background-color ease-out 250ms;
-}
-
-.btn:hover {
-  background-color: $accent;
-  color: #fff;
-  cursor: pointer;
 }
 
 .main__box-title {
@@ -142,35 +190,56 @@ main {
   margin-top: 1rem;
 
   .main__box-title {
-    justify-content: center;
+    @include flex-center();
   }
+}
 
-  #form__input {
-    @include flex-colum();
+.modal__box {
+  margin: 0;
+  width: 100%;
+  background-color: rgba($color: #808080, $alpha: 0.9);
+  display: none;
 
-    align-items: center;
-    padding: 1rem;
+  @include flex-center();
 
-    .input__field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+
+  .modal__game {
+    width: 90%;
+    max-width: 400px;
+    margin: 0;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+
+    > * {
       width: 100%;
-      max-width: 500px;
-      margin-bottom: 1rem;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .select__field {
       padding: 0.5rem;
+      margin-top: 1rem;
       border: none;
       outline: 1px solid $gray-dark;
 
       @include font();
     }
-
-    .input__field:focus {
-      outline: 1px solid $accent;
-    }
-
-    .btn {
-      margin-top: 1rem;
-      align-self: flex-end;
-    }
   }
+}
+
+.modal__box-display {
+  display: flex;
 }
 
 /* FORM VALIDATION */
