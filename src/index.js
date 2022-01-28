@@ -1,37 +1,41 @@
 import './scss/style.scss';
 import DataBoard from './dataBoard.js';
+import * as MODAL from './modal.js';
 
 const data = new DataBoard();
 const refreshBtn = document.querySelector('#btn__refresh');
-const inputForm = document.querySelector('#form__input');
+const scoreForm = document.querySelector('#form__input');
 const inputUser = document.querySelector('#inp__user');
 const inputScore = document.querySelector('#inp__score');
 const scoreList = document.querySelector('#score__list');
-const formMessage = document.querySelector('#form__message');
+const formMsgScore = document.querySelector('#form__message-score');
+const gameForm = document.querySelector('#form__game');
+const inputGame = document.querySelector('#inp__game');
+const selectGame = document.querySelector('#select__game');
 
 const displayMessage = (err) => {
   if (err) {
-    formMessage.textContent = err;
-    formMessage.classList.add('error-message');
+    formMsgScore.textContent = err;
+    formMsgScore.classList.add('error-message');
   }
-  formMessage.classList.add('visible');
+  formMsgScore.classList.add('visible');
   setTimeout(() => {
-    formMessage.classList.remove('visible');
+    formMsgScore.classList.remove('visible');
   }, 5000);
 };
 
 const validateForm = () => {
-  formMessage.classList.remove('error-message');
+  formMsgScore.classList.remove('error-message');
   if (inputUser.value === '') {
     inputUser.focus();
-    formMessage.textContent = 'User field is required.';
-    formMessage.classList.add('error-message');
+    formMsgScore.textContent = 'User field is required.';
+    formMsgScore.classList.add('error-message');
     return false;
   }
   if (inputScore.value === '' || inputScore.value <= 0) {
     inputScore.focus();
-    formMessage.textContent = 'Score field must be a positive number.';
-    formMessage.classList.add('error-message');
+    formMsgScore.textContent = 'Score field must be a positive number.';
+    formMsgScore.classList.add('error-message');
     return false;
   }
   return true;
@@ -53,29 +57,46 @@ const getScoresList = () => {
 const addNewScore = () => {
   data.addScore(inputUser.value, inputScore.value).then(() => {
     if (data.message !== 'Successful') displayMessage(data.message);
-    else getScoresList();
   });
 };
 
 const addNewGame = () => {
-  data.addGame().then(() => {
-    if (data.message !== 'Successful') displayMessage(data.message);
-    else getScoresList();
+  data.addGame(inputGame.value).then(() => {
+    if (data.message !== 'Successful') {
+      MODAL.displayModalMessage(data.message);
+    } else {
+      MODAL.hideModalGame(data.getGame()[0].nameG);
+      inputGame.value = '';
+      getScoresList();
+    }
   });
 };
 
-// events listener
+// EVENTS LISTENER
 refreshBtn.addEventListener('click', getScoresList);
 
-inputForm.addEventListener('submit', (e) => {
+scoreForm.addEventListener('submit', (e) => {
   e.preventDefault();
   if (validateForm()) {
     addNewScore();
     inputUser.value = '';
     inputScore.value = '';
-    formMessage.textContent = 'Score added successfully';
+    formMsgScore.textContent = 'Score added successfully';
   }
   displayMessage();
 });
 
-window.addEventListener('load', addNewGame);
+gameForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addNewGame();
+});
+
+selectGame.addEventListener('change', (e) => {
+  if (e.target.value !== '') {
+    data.idGame = e.target.value;
+    MODAL.hideModalGame(e.target.options[e.target.selectedIndex].text);
+    getScoresList();
+  }
+});
+
+window.addEventListener('load', MODAL.displayModalGame());
