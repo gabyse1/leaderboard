@@ -40,7 +40,7 @@ const displayModalGame = () => {
 
 const hideModalGame = (game) => {
   const title = document.querySelector('#title');
-  title.innerHTML = `LEADERBOARD - ${game}`;
+  title.innerHTML = `LEADERBOARD "${game}"`;
   modalBox.classList.remove('modal__box-display');
 };
 
