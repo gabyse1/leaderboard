@@ -2,7 +2,9 @@
 The leaderboard website displays scores submitted by different players. It also allows you to submit your score. All data is preserved thanks to the external Leaderboard API service.
 
 ![screenshot create or choose a game](./images/screenshot-newgame.png)
+
 ![screenshot empty score list](./images/screenshot-emptyscores.png)
+
 ![screenshot full score list](./images/screenshot-fullscores.png)
 
 
