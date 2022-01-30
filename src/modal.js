@@ -1,13 +1,37 @@
 const modalBox = document.querySelector('#modal__box');
 const changeGame = document.querySelector('#btn__change-game');
+const formMsgGame = document.querySelector('#form__message-game');
+let timerId = '';
 
-const displayModalMessage = (msg) => {
-  const formMsg = document.querySelector('#form__message-game');
-  formMsg.textContent = msg;
-  formMsg.classList.add('error-message', 'visible');
-  setTimeout(() => {
-    formMsg.classList.remove('error-message', 'visible');
-  }, 5000);
+const displayMessage = (eldom, msg) => {
+  clearTimeout(timerId);
+  if (msg) {
+    eldom.textContent = msg;
+    eldom.classList.add('error-message');
+  }
+  eldom.classList.add('visible');
+  timerId = setTimeout(() => {
+    eldom.classList.remove('error-message', 'visible');
+  }, 10000);
+};
+
+const validString = (str) => {
+  if (str.match(/^[a-zA-Z0-9À-ÿ\u00f1\u00d1\u00E0\u00FC_\- ]{1,30}$/)) return true;
+  return false;
+};
+
+const validNumber = (str) => {
+  if (str.match(/^[0-9]{1,7}$/)) return true;
+  return false;
+};
+
+const validateGameForm = (eldom) => {
+  eldom.value = eldom.value.trim();
+  if (!validString(eldom.value)) {
+    displayMessage(formMsgGame, 'Game field only allows alphanumeric, hyphens, underscores, and max 30 characters.');
+    return false;
+  }
+  return true;
 };
 
 const createLS = () => {
@@ -46,4 +70,6 @@ const hideModalGame = (game) => {
 
 changeGame.addEventListener('click', displayModalGame);
 
-export { displayModalGame, displayModalMessage, hideModalGame };
+export {
+  displayModalGame, displayMessage, validateGameForm, validString, validNumber, hideModalGame,
+};
