@@ -24,7 +24,7 @@ body {
 
   h1,
   h2 {
-    @include font($fs: 1.6rem, $lh:1.3rem, $fw:bold, $tt: uppercase);
+    @include font($fs: 1.6rem, $lh:1.5rem, $fw:bold, $tt: uppercase);
 
     align-self: center;
   }
@@ -88,6 +88,7 @@ body {
 header {
   margin-bottom: 0;
   border: 1px solid $gray-dark;
+  text-align: center;
 }
 
 #options__box {
@@ -223,11 +224,38 @@ main {
 
     > * {
       width: 100%;
+
+      > * {
+        width: 100%;
+      }
     }
 
     h2 {
       margin-top: 0;
       margin-bottom: 1.5rem;
+    }
+
+    .field__container {
+      border: 1px solid $gray-dark;
+
+      @include flex-row;
+
+      .input__field {
+        margin: 0;
+        outline: none;
+      }
+    }
+
+    .btn__submit-game {
+      width: 2rem;
+      height: 2.1rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+
+      svg {
+        fill: $accent;
+      }
     }
 
     .select__field {
@@ -249,7 +277,7 @@ main {
 .form__message {
   display: none;
   padding: 0.3rem;
-  margin: 0.5rem 0;
+  margin-top: 0.5rem;
   font-size: 0.9rem;
   color: #05d3b1;
 }

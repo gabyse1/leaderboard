@@ -49,7 +49,7 @@ export default class DataBoard {
 
   addGame = async (game) => {
     try {
-      if (this.validGame(game)) {
+      if (!this.existGame(game)) {
         await fetch(`${this.url}games/`, {
           method: 'POST',
           body: JSON.stringify({ name: game }),
@@ -76,22 +76,13 @@ export default class DataBoard {
     if (localGames) {
       this.games = localGames;
       const filterGame = this.games.filter((el) => el.nameG.toLowerCase() === game.toLowerCase());
-      if (filterGame.length > 0) return true;
+      if (filterGame.length > 0) {
+        this.message = 'A game with this name already exists.';
+        return true;
+      }
     }
     return false;
   };
-
-  validGame = (game) => {
-    if (game === '' || game === null) {
-      this.message = 'Please enter a valid game name';
-      return false;
-    }
-    if (this.existGame(game)) {
-      this.message = 'A game with this name already exists.';
-      return false;
-    }
-    return true;
-  }
 
   getGame = () => {
     const gn = this.games.filter((el) => el.idG === this.idGame);

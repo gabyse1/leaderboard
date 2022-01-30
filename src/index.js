@@ -13,29 +13,18 @@ const gameForm = document.querySelector('#form__game');
 const inputGame = document.querySelector('#inp__game');
 const selectGame = document.querySelector('#select__game');
 
-const displayMessage = (err) => {
-  if (err) {
-    formMsgScore.textContent = err;
-    formMsgScore.classList.add('error-message');
-  }
-  formMsgScore.classList.add('visible');
-  setTimeout(() => {
-    formMsgScore.classList.remove('visible');
-  }, 5000);
-};
-
-const validateForm = () => {
+const validateScoreForm = () => {
   formMsgScore.classList.remove('error-message');
-  if (inputUser.value === '') {
+  inputUser.value = inputUser.value.trim();
+  inputScore.value = inputScore.value.trim().replace(/^(0+)/g, '');
+  if (!MODAL.validString(inputUser.value)) {
     inputUser.focus();
-    formMsgScore.textContent = 'User field is required.';
-    formMsgScore.classList.add('error-message');
+    MODAL.displayMessage(formMsgScore, 'User field only admits alphanumeric, hyphens, underscores, and max 30 characters.');
     return false;
   }
-  if (inputScore.value === '' || inputScore.value <= 0) {
+  if (!MODAL.validNumber(inputScore.value)) {
     inputScore.focus();
-    formMsgScore.textContent = 'Score field must be a positive number.';
-    formMsgScore.classList.add('error-message');
+    MODAL.displayMessage(formMsgScore, 'Supported scoring range: 1 - 9999999.');
     return false;
   }
   return true;
@@ -56,14 +45,14 @@ const getScoresList = () => {
 
 const addNewScore = () => {
   data.addScore(inputUser.value, inputScore.value).then(() => {
-    if (data.message !== 'Successful') displayMessage(data.message);
+    if (data.message !== 'Successful') MODAL.displayMessage(formMsgScore, data.message);
   });
 };
 
 const addNewGame = () => {
   data.addGame(inputGame.value).then(() => {
     if (data.message !== 'Successful') {
-      MODAL.displayModalMessage(data.message);
+      MODAL.displayMessage(data.message);
     } else {
       MODAL.hideModalGame(data.getGame()[0].nameG);
       inputGame.value = '';
@@ -77,18 +66,19 @@ refreshBtn.addEventListener('click', getScoresList);
 
 scoreForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  if (validateForm()) {
+  if (validateScoreForm()) {
     addNewScore();
     inputUser.value = '';
+    inputUser.focus();
     inputScore.value = '';
     formMsgScore.textContent = 'Score added successfully';
   }
-  displayMessage();
+  MODAL.displayMessage(formMsgScore);
 });
 
 gameForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  addNewGame();
+  if (MODAL.validateGameForm(inputGame)) addNewGame();
 });
 
 selectGame.addEventListener('change', (e) => {
