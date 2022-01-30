@@ -28,7 +28,7 @@ const validNumber = (str) => {
 const validateGameForm = (eldom) => {
   eldom.value = eldom.value.trim();
   if (!validString(eldom.value)) {
-    displayMessage(formMsgGame, 'Game field only admits alphanumeric, hyphens, underscores, and max 30 characters.');
+    displayMessage(formMsgGame, 'Game field only allows alphanumeric, hyphens, underscores, and max 30 characters.');
     return false;
   }
   return true;

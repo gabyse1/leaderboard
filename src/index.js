@@ -19,7 +19,7 @@ const validateScoreForm = () => {
   inputScore.value = inputScore.value.trim().replace(/^(0+)/g, '');
   if (!MODAL.validString(inputUser.value)) {
     inputUser.focus();
-    MODAL.displayMessage(formMsgScore, 'User field only admits alphanumeric, hyphens, underscores, and max 30 characters.');
+    MODAL.displayMessage(formMsgScore, 'User field only allows alphanumeric, hyphens, underscores, and max 30 characters.');
     return false;
   }
   if (!MODAL.validNumber(inputScore.value)) {
