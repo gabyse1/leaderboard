@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Leaderboard" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="../images/screenshot-fullscores.png">
+  <meta property="og:url" content="https://gabyse1.github.io/leaderboard/dist" />
+  <meta property="og:description" content="This minimalistic design website displays scores submitted by different players. The user can also create more than a game and submit his scores in all of them. The site preserves the data thanks to an external API called Leaderboard." />
+  <title>Leaderboard</title>
+<script defer src="index.bundle.js"></script></head>
+
+<body>
+  <header>
+    <h1 id="title">Leaderboard</h1>
+  </header>
+  <div id="options__box">
+    <button type="button" id="btn__change-game" class="btn">Change game</button>
+  </div>
+  <main>
+    <div class="main__box score__box">
+      <div class="main__box-title">
+        <h2>Recent scores</h2>
+        <button type="button" name="btn__refresh" id="btn__refresh" class="btn">Refresh</button>
+      </div>
+      <ul class="score__list" id="score__list">
+      </ul>
+    </div>
+    <div class="main__box form__box">
+      <div class="main__box-title">
+        <h2>Add your score</h2>
+      </div>
+      <form action="#" id="form__input">
+        <input type="text" name="inp__user" id="inp__user" class="input__field" placeholder="User...">
+        <input type="number" name="inp__score" id="inp__score" class="input__field" min="1" max="9999999"
+          placeholder="Score...">
+        <input type="submit" name="btn__submit" id="btn__submit" class="btn" value="Submit">
+        <span class="form__message" id="form__message-score"></span>
+      </form>
+    </div>
+  </main>
+  <div id="modal__box" class="modal__box modal__box-display">
+    <div id="modal__content" class="modal__game">
+      <h2>Create or choose a game</h2>
+      <form action="#" id="form__game">
+        <div class="field__container">
+          <input type="text" name="inp__game" id="inp__game" class="input__field" placeholder="Game name...">
+          <button type="submit" id="btn__submit-game" class="btn__submit-game">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 56.24">
+              <path
+                d="M24.53,31V46.61c.75,0,1.43.11,2.11.11,18,0,35.93,0,53.9,0,1.85,0,2.46-.51,2.43-2.39-.1-6.66,0-13.31,0-20,0-2.51,0-2.5,2.58-2.5,3.88,0,7.76.06,11.63,0,1.47,0,1.87.48,1.87,1.9C98.95,33.86,99,43.94,99,54a8.38,8.38,0,0,1-8.69,8.79c-21-.13-42-.06-63-.06-2.76,0-2.76,0-2.76,2.73,0,4.33,0,8.65,0,12.63L1,54.54Z"
+                transform="translate(-1 -21.88)" />
+            </svg>
+          </button>
+        </div>
+        <span class="form__message" id="form__message-game"></span>
+      </form>
+      <select name="select__game" id="select__game" class="select__field"></select>
+    </div>
+  </div>
+</body>
+
+</html>
