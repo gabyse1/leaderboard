@@ -1,11 +1,11 @@
 # leaderboard
 The leaderboard website displays scores submitted by different players. It also allows you to submit your score. All data is preserved thanks to the external Leaderboard API service.
 
-![screenshot create or choose a game](./images/screenshot-newgame.png)
+![screenshot create or choose a game](./images/lb-screenshot-newgame.png)
 
-![screenshot empty score list](./images/screenshot-emptyscores.png)
+![screenshot empty score list](./images/lb-screenshot-emptyscores.png)
 
-![screenshot full score list](./images/screenshot-fullscores.png)
+![screenshot full score list](./images/lb-screenshot-fullscores.png)
 
 
 ## Features
@@ -19,11 +19,14 @@ The leaderboard website displays scores submitted by different players. It also 
 
 ## Built With
 
-- HTML / SCSS / Javascript / Webpack
+- Javascript
+- HTML
+- SCSS
+- Webpack
 
 ## Live Demo
 
-[Leaderboard](https://gabyse1.github.io/leaderboard/dist/)
+[Leaderboard](https://gabyse1.github.io/leaderboard/)
 
 
 ## Getting Started
