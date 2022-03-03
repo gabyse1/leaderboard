@@ -1,3 +1,5 @@
+import '../images/lb-screenshot-1200x627.png';
+import '../images/favicon.ico';
 import './scss/style.scss';
 import DataBoard from './dataBoard.js';
 import * as MODAL from './modal.js';
